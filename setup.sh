@@ -1,5 +1,7 @@
 #!/bin/bash
 
+pass="$1"
+
 export DEBIAN_FRONTEND=noninteractive
 apt-get update
 apt-get install -y openssh-server git sudo figlet bc zsh update-motd curl wget neofetch git zip imagemagick unzip
@@ -22,7 +24,7 @@ if [ ! -f /usr/share/figlet/smblock.tlf ]; then
 fi
 
 if [ ! -d "/var/run/sshd" ]; then
-    echo 'root:${pass}' | chpasswd
+    echo 'root:$pass' | chpasswd
     echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
     sed -i 's/^#AllowTcpForwarding yes/AllowTcpForwarding yes/; s/^#PasswordAuthentication yes/PasswordAuthentication yes/; s/^#Port 22/Port 22/' /etc/ssh/sshd_config
     /usr/sbin/sshd -D
