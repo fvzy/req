@@ -88,7 +88,7 @@ case $opt in
 1|01) clear ; curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash - && sudo apt-get install -y nodejs;;
 2|02) clear ; apt install ffmpeg -y ;;
 3|03) clear ; apt install imagemagick -y ;;
-4|04) cek_nodejs ;;
-5|05) curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash ; sudo su ; echo -e "Ketik : ${blue}nmv install 18" ;;
+4|04) clear ; cek_nodejs ;;
+5|05) clear ; curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash ; sudo su ; echo -e "Ketik : ${blue}nmv install 18" ;;
 0|00) clear ; exit 0 ;;
 esac
