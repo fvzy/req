@@ -18,14 +18,6 @@ if [ ! -d /usr/src/motd ]; then
     cd /etc/update-motd.d/ || exit
     rm -f 50-motd-news 60-unminimize 10-help-text
 fi
-
-
-# Nama file skrip
-if [ ! -f /usr/bin/menu ]; then
-    cd /usr/local/bin/ || exit
-    wget https://raw.githubusercontent.com/fvzy/req/main/menu
-    chmod +x /usr/local/bin/menu
-fi
 if [ ! -d "/var/run/sshd" ]; then
     echo 'root:$pass' | chpasswd
     echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
