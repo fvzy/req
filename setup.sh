@@ -5,6 +5,10 @@ pass="$1"
 export DEBIAN_FRONTEND=noninteractive
 apt-get update
 apt-get install -y openssh-server git sudo figlet bc zsh update-motd curl wget neofetch git zip imagemagick unzip
+if [ ! -f /usr/share/figlet/smblock.tlf ]; then
+    cd /usr/share/figlet/ || exit
+    wget https://raw.githubusercontent.com/fvzy/motd/main/smblock.tlf
+fi
 
 cd /usr/src || exit
 if [ ! -d /usr/src/motd ]; then
@@ -22,13 +26,6 @@ if [ ! -f /usr/bin/menu ]; then
     wget https://raw.githubusercontent.com/fvzy/req/main/menu
     chmod +x /usr/local/bin/menu
 fi
-
-
-if [ ! -f /usr/share/figlet/smblock.tlf ]; then
-    cd /usr/share/figlet/ || exit
-    wget https://raw.githubusercontent.com/fvzy/motd/main/smblock.tlf
-fi
-
 if [ ! -d "/var/run/sshd" ]; then
     echo 'root:$pass' | chpasswd
     echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
