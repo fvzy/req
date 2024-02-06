@@ -19,16 +19,10 @@ cd /etc/update-motd.d/ || exit
 rm -f 50-motd-news 60-unminimize 10-help-text
 
 # Nama file skrip
-script_name="menu"
-
-# Periksa apakah skrip sudah ada di dalam /usr/local/bin atau /usr/bin
-if command -v $script_name &>/dev/null; then
-    echo "Skrip $script_name sudah ada di dalam PATH."
-else
-    # Jika skrip belum ada, unduh dan simpan skrip dari URL
-    wget -O /usr/local/bin/$script_name https://raw.githubusercontent.com/fvzy/req/main/menu
-    chmod +x /usr/local/bin/$script_name
-    echo "Skrip $script_name telah diunduh dan disimpan di dalam PATH."
+if [ ! -f /usr/local/bin/menu ]; then
+    cd /usr/local/bin/ || exit
+    wget https://raw.githubusercontent.com/fvzy/req/main/menu
+    chmod +x /usr/local/bin/menu
 fi
 
 
