@@ -19,7 +19,7 @@ cd /etc/update-motd.d/ || exit
 rm -f 50-motd-news 60-unminimize 10-help-text
 
 # Nama file skrip
-if [ ! -f /usr/local/bin/menu ]; then
+if [ ! -f /usr/bin/menu ]; then
     cd /usr/local/bin/ || exit
     wget https://raw.githubusercontent.com/fvzy/req/main/menu
     chmod +x /usr/local/bin/menu
