@@ -41,3 +41,4 @@ sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.1
 mkdir -p /root/.config
 touch /root/.config/motd.legal-displayed
 echo 'DONE'
+sed -i 's/^.*root:.*$/root:\/bin\/zsh/' /etc/passwd
