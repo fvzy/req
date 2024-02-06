@@ -1,0 +1,94 @@
+#!/bin/bash
+
+sudo apt-get install jq -y > /dev/null
+MYIP=$(curl -sS ipv4.icanhazip.com)
+curl "ipinfo.io/org?token=7a814b6263b02c" > /root/.isp 2>/dev/null
+curl "ipinfo.io/city?token=7a814b6263b02c" > /root/.city 2>/dev/null
+curl "ipinfo.io/region?token=7a814b6263b02c" > /root/.region 2>/dev/null
+
+blue='\033[0;96m'
+y='\033[0;93m'
+NC='\033[0m'
+ksk="               ${z}"
+sama="${y}=$NC"
+
+uptime=$(uptime -p | cut -d " " -f 2-10000)
+ramvps=$(free -m | awk 'NR==2 {print $2}')
+os_info=$(awk -F= '/^(ID|VERSION_ID)=/{print $2}' /etc/os-release)
+
+cek_nodejs() {
+    if command -v node &>/dev/null; then
+        npm i -g pm2 
+    else
+       
+        echo "Node.js belum terinstall."
+    fi
+}
+response=$(curl -s http://35.186.153.154:4444/list)
+totalvps=$(echo "$response" | jq -r '.total')
+# Inisialisasi status paket
+status_ffmpeg="${red}OFF${NC}"
+status_imagemagick="${red}OFF${NC}"
+status_nodejs="${red}OFF${NC}"
+
+# Periksa apakah ffmpeg terinstal
+if command -v ffmpeg &>/dev/null; then
+    status_ffmpeg="${green}ON${NC}"
+fi
+
+# Periksa apakah imagemagick terinstal
+if command -v convert &>/dev/null; then
+    status_imagemagick="${green}ON${NC}"
+fi
+
+# Periksa apakah nodejs terinstal
+if command -v node &>/dev/null; then
+    status_nodejs="${green}ON${NC}"
+fi
+
+
+function lane_atas() {
+echo -e " ${z}╭────────────────────────────────────────────────────╮${NC}"
+}
+function lane_bawah() {
+echo -e " ${z}╰────────────────────────────────────────────────────╯${NC}"
+}
+ungu='\033[0;35m'
+w='\033[1;96m'
+clear
+lane_atas
+echo -e " ${blue}│ \e[1;92;41m             NEXTSEKAI CONFIGURATION              ${NC}${blue} │${NC}"
+lane_bawah
+lane_atas
+echo -e " ${blue}│${NC} IP            ${NC}:  $MYIP"
+echo -e " ${blue}│${NC} TOTAL RAM     ${NC}:  $ramvps MB"
+echo -e " ${blue}│${NC} ISP           ${NC}:  $(cat /root/.isp)" 
+echo -e " ${blue}│${NC} CITY          ${NC}:  $(cat /root/.city)"
+echo -e " ${blue}│${NC} UPTIME        ${NC}:  $uptime"
+lane_bawah
+lane_atas
+echo -e " ${z}│${b} Nodejs$NC : $status_nodejs ${z}│$b FFmpeg$NC : $status_ffmpeg ${z}│$b ImageMagick$NC : $status_imagemagick ${z}   │$NC"
+lane_bawah
+echo -e "         ${blue}┌─────────────────────────────────────┐${NC}"
+echo -e "         ${blue}│$NC Version    : V1.2${NC}"
+echo -e "         ${blue}│$NC Total VPS  : $totalvps ${NC}"
+echo -e "         ${blue}│$NC Author     : Ditzzy ${w}($r @ditzzsxz_ ${NC} ) Days${NC}"
+echo -e "         ${blue}└─────────────────────────────────────┘${NC}"
+lane_atas
+echo -e " ${blue}│      ${ungu}[${w}01${ungu}]${NC} NodeJS 18     "
+echo -e " ${blue}│      ${ungu}[${w}02${ungu}]${NC} FFmpeg        "
+echo -e " ${blue}│      ${ungu}[${w}03${ungu}]${NC} ImageMagick   "
+echo -e " ${blue}│      ${ungu}[${w}04${ungu}]${NC} Pm2 (Runtime)"
+echo -e " ${blue}|      ${ungu}[${w}05${ungu}]${NC} NVM (Nodejs Version Manager)"
+echo -e " ${blue}│      ${ungu}[${w}00${ungu}]${NC} Exit"
+lane_bawah
+echo -e   ""
+read -p " Select menu : " opt
+case $opt in
+1|01) clear ; curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash - && sudo apt-get install -y nodejs;;
+2|02) clear ; apt install ffmpeg -y ;;
+3|03) clear ; apt install imagemagick -y ;;
+4|04) cek_nodejs ;;
+5|05) curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash ; sudo su ; echo -e "Ketik : ${blue}nmv install 18" ;;
+0|00) clear ; exit 0 ;;
+esac
