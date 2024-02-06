@@ -72,7 +72,7 @@ lane_bawah
 echo -e "         ${blue}┌─────────────────────────────────────┐${NC}"
 echo -e "         ${blue}│$NC Version    : V1.2${NC}"
 echo -e "         ${blue}│$NC Total VPS  : $totalvps ${NC}"
-echo -e "         ${blue}│$NC Author     : Ditzzy ${w}($r @ditzzsxz_ ${NC} ) Days${NC}"
+echo -e "         ${blue}│$NC Author     : Ditzzy ${w}($r @ditzzsxz_ ${NC}) ${NC}"
 echo -e "         ${blue}└─────────────────────────────────────┘${NC}"
 lane_atas
 echo -e " ${blue}│      ${ungu}[${w}01${ungu}]${NC} NodeJS 18     "
