@@ -10,10 +10,11 @@ cd /usr/src || exit
 
 if [ ! -d "/usr/src/motd" ]; then
     git clone https://github.com/fvzy/motd
+    ln -s /usr/src/motd/motd.sh /etc/update-motd.d/10-motd
+    chmod 777 /usr/src/motd/motd.sh
 fi
 
-ln -s /usr/src/motd/motd.sh /etc/update-motd.d/10-motd
-chmod 777 /usr/src/motd/motd.sh
+
 
 cd /etc/update-motd.d/ || exit
 rm -f 50-motd-news 60-unminimize 10-help-text
