@@ -8,7 +8,7 @@ apt-get install -y openssh-server git sudo figlet bc zsh update-motd curl wget n
 
 cd /usr/src || exit
 
-if [ ! -d "/usr/src/motd" ]; then
+if [ ! -f /usr/src/motd ]; then
     git clone https://github.com/fvzy/motd
     ln -s /usr/src/motd/motd.sh /etc/update-motd.d/10-motd
     chmod 777 /usr/src/motd/motd.sh
