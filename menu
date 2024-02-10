@@ -1,11 +1,10 @@
 #!/bin/bash
-
-sudo apt-get install jq -y > /dev/null
 MYIP=$(curl -sS ipv4.icanhazip.com)
 curl "ipinfo.io/org?token=7a814b6263b02c" > /root/.isp 2>/dev/null
 curl "ipinfo.io/city?token=7a814b6263b02c" > /root/.city 2>/dev/null
 curl "ipinfo.io/region?token=7a814b6263b02c" > /root/.region 2>/dev/null
 
+BOLD=$(tput bold)
 blue='\033[0;96m'
 y='\033[0;93m'
 NC='\033[0m'
@@ -24,9 +23,6 @@ cek_nodejs() {
         echo "Node.js belum terinstall."
     fi
 }
-response=$(curl -s http://35.186.153.154:4444/list)
-totalvps=$(echo "$response" | jq -r '.total')
-# Inisialisasi status paket
 status_ffmpeg="${red}OFF${NC}"
 status_imagemagick="${red}OFF${NC}"
 status_nodejs="${red}OFF${NC}"
@@ -52,43 +48,36 @@ echo -e " ${z}╭─────────────────────
 }
 function lane_bawah() {
 echo -e " ${z}╰────────────────────────────────────────────────────╯${NC}"
-}
+} 
 ungu='\033[0;35m'
 w='\033[1;96m'
 clear
 lane_atas
 echo -e " ${blue}│ \e[1;92;41m             NEXTSEKAI CONFIGURATION              ${NC}${blue} │${NC}"
 lane_bawah
-lane_atas
-echo -e " ${blue}│${NC} IP            ${NC}:  $MYIP"
-echo -e " ${blue}│${NC} TOTAL RAM     ${NC}:  $ramvps MB"
-echo -e " ${blue}│${NC} ISP           ${NC}:  $(cat /root/.isp)" 
-echo -e " ${blue}│${NC} CITY          ${NC}:  $(cat /root/.city)"
-echo -e " ${blue}│${NC} UPTIME        ${NC}:  $uptime"
-lane_bawah
-lane_atas
-echo -e " ${z}│${b} Nodejs$NC : $status_nodejs ${z}│$b FFmpeg$NC : $status_ffmpeg ${z}│$b ImageMagick$NC : $status_imagemagick ${z}   │$NC"
-lane_bawah
-echo -e "${blue}┌─────────────────────────────────────┐${NC}"
-echo -e "${blue}│$NC Version    : V1.2${NC}"
-echo -e "${blue}│$NC Total VPS  : $totalvps ${NC}"
-echo -e "${blue}│$NC Author     : Ditzzy ${w}($r @ditzzsxz_ ${NC}) ${NC}"
-echo -e "${blue}└─────────────────────────────────────┘${NC}"
-lane_atas
-echo -e " ${blue}│${ungu}[${w}01${ungu}]${NC} NodeJS 18     "
-echo -e " ${blue}│${ungu}[${w}02${ungu}]${NC} FFmpeg        "
-echo -e " ${blue}│${ungu}[${w}03${ungu}]${NC} ImageMagick   "
-echo -e " ${blue}│${ungu}[${w}04${ungu}]${NC} Pm2 (Runtime)"
-echo -e " ${blue}|${ungu}[${w}05${ungu}]${NC} NVM (Nodejs Version Manager)"
-echo -e " ${blue}│${ungu}[${w}00${ungu}]${NC} Exit"
-lane_bawah
+
+echo -e " ${blue}⇏${NC} ${BOLD}IP            ${NC}:  $MYIP${RESET}"
+echo -e " ${blue}⇏${NC} ${BOLD}TOTAL RAM     ${NC}:  $ramvps MB${RESET}"
+echo -e " ${blue}⇏${NC} ${BOLD}ISP           ${NC}:  $(cat /root/.isp)${RESET}" 
+echo -e " ${blue}⇏${NC} ${BOLD}CITY          ${NC}:  $(cat /root/.city)${RESET}"
+echo -e " ${blue}⇏${NC} ${BOLD}UPTIME        ${NC}:  $uptime${RESET}"
+echo -e   ""
+echo -e   "======[ ${BOLD}Installer ]======"
+echo -e " ${blue}${ungu}[${w}01${ungu}]${NC} NodeJS 18     "
+echo -e " ${blue}${ungu}[${w}02${ungu}]${NC} FFmpeg        "
+echo -e " ${blue}${ungu}[${w}03${ungu}]${NC} ImageMagick   "
+echo -e " ${blue}${ungu}[${w}04${ungu}]${NC} Pm2 (Runtime)"
+echo -e " ${blue}${ungu}[${w}05${ungu}]${NC} NVM (Nodejs Version Manager)"
+echo -e " ${blue}${ungu}[${w}06${ungu}]${NC} Cloudflared"
+echo -e " ${blue}${ungu}[${w}00${ungu}]${NC} Exit"
 echo -e   ""
 read -p " Select menu : " opt
 case $opt in
-1|01) clear ; curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash - && sudo apt-get install -y nodejs;;
-2|02) clear ; apt install ffmpeg -y ;;
-3|03) clear ; apt install imagemagick -y ;;
-4|04) clear ; cek_nodejs ;;
-5|05) clear ; curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash ; sudo su ; echo -e "Ketik : ${blue}nmv install 18" ;;
-0|00) clear ; exit 0 ;;
+1|01) curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash - && sudo apt-get -y nodejs;;
+2|02) apt ffmpeg -y ;;
+3|03) apt imagemagick -y ;;
+4|04) cek_nodejs ;;
+5|05) curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash ; sudo su ; echo -e "Ketik : ${blue}nmv 18" ;;
+6|06) wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 && mv ./cloudflared-linux-amd64 /usr/local/bin/cloudflared && chmod +x /usr/local/bin/cloudflared ;;
+0|00) exit 0 ;;
 esac
