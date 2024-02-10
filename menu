@@ -69,18 +69,18 @@ lane_bawah
 lane_atas
 echo -e " ${z}│${b} Nodejs$NC : $status_nodejs ${z}│$b FFmpeg$NC : $status_ffmpeg ${z}│$b ImageMagick$NC : $status_imagemagick ${z}   │$NC"
 lane_bawah
-echo -e "         ${blue}┌─────────────────────────────────────┐${NC}"
-echo -e "         ${blue}│$NC Version    : V1.2${NC}"
-echo -e "         ${blue}│$NC Total VPS  : $totalvps ${NC}"
-echo -e "         ${blue}│$NC Author     : Ditzzy ${w}($r @ditzzsxz_ ${NC}) ${NC}"
-echo -e "         ${blue}└─────────────────────────────────────┘${NC}"
+echo -e "${blue}┌─────────────────────────────────────┐${NC}"
+echo -e "${blue}│$NC Version    : V1.2${NC}"
+echo -e "${blue}│$NC Total VPS  : $totalvps ${NC}"
+echo -e "${blue}│$NC Author     : Ditzzy ${w}($r @ditzzsxz_ ${NC}) ${NC}"
+echo -e "${blue}└─────────────────────────────────────┘${NC}"
 lane_atas
-echo -e " ${blue}│      ${ungu}[${w}01${ungu}]${NC} NodeJS 18     "
-echo -e " ${blue}│      ${ungu}[${w}02${ungu}]${NC} FFmpeg        "
-echo -e " ${blue}│      ${ungu}[${w}03${ungu}]${NC} ImageMagick   "
-echo -e " ${blue}│      ${ungu}[${w}04${ungu}]${NC} Pm2 (Runtime)"
-echo -e " ${blue}|      ${ungu}[${w}05${ungu}]${NC} NVM (Nodejs Version Manager)"
-echo -e " ${blue}│      ${ungu}[${w}00${ungu}]${NC} Exit"
+echo -e " ${blue}│${ungu}[${w}01${ungu}]${NC} NodeJS 18     "
+echo -e " ${blue}│${ungu}[${w}02${ungu}]${NC} FFmpeg        "
+echo -e " ${blue}│${ungu}[${w}03${ungu}]${NC} ImageMagick   "
+echo -e " ${blue}│${ungu}[${w}04${ungu}]${NC} Pm2 (Runtime)"
+echo -e " ${blue}|${ungu}[${w}05${ungu}]${NC} NVM (Nodejs Version Manager)"
+echo -e " ${blue}│${ungu}[${w}00${ungu}]${NC} Exit"
 lane_bawah
 echo -e   ""
 read -p " Select menu : " opt
