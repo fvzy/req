@@ -73,7 +73,7 @@ echo -e " ${blue}${ungu}[${w}00${ungu}]${NC} Exit"
 echo -e   ""
 read -p " Select menu : " opt
 case $opt in
-1|01) curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash - && sudo apt-get -y nodejs;;
+1|01) curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash - && sudo apt-get -y nodejs ;;
 2|02) apt ffmpeg -y ;;
 3|03) apt imagemagick -y ;;
 4|04) cek_nodejs ;;
