@@ -16,7 +16,7 @@ services:
 
   cloudflare_tunnel:
     image: cloudflare/cloudflared:latest
-    command: tunnel --url http://portainer:9000 --hostname trycloudflare.com
+    command: tunnel --url http://localhost:9011 --hostname trycloudflare.com
     restart: unless-stopped
     networks:
       - default
