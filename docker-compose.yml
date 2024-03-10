@@ -1,4 +1,3 @@
-# docker-compose.yml 
 version: '3'
  
 services:
@@ -13,4 +12,17 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./portainer-data:/data
     ports:
-      - 9011:9000
+      - 9000:9000
+
+  cloudflare_tunnel:
+    image: cloudflare/cloudflared:latest
+    command: tunnel --url http://portainer:9000 --hostname trycloudflare.com
+    restart: unless-stopped
+    networks:
+      - default
+    security_opt:
+      - no-new-privileges:true
+    cap_add:
+      - NET_ADMIN
+    depends_on:
+      - portainer
