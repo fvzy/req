@@ -14,4 +14,4 @@ services:
       - /:/host
       - ./portainer-data:/data
     ports:
-      - 9011:9000
+      - 9711:9000
